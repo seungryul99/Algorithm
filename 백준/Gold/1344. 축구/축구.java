@@ -32,7 +32,7 @@ public class Main {
         if(dp[time][teamA][teamB] != -1) return dp[time][teamA][teamB];
 
         // 로직
-        double val=1;
+        double val=0;
 
         val += go(time+5,teamA, teamB) * (1-a) * (1-b);
         val += go(time+5,teamA+1, teamB) * a * (1-b);
@@ -57,6 +57,6 @@ public class Main {
             }
         }
 
-        System.out.println(go(0,0,0)-18);
+        System.out.println(go(0,0,0));
     }
 }
