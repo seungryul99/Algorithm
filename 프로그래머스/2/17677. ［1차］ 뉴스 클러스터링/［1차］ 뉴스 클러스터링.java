@@ -12,7 +12,7 @@ class Solution {
         
             if(sub.charAt(0) >= 'a' && sub.charAt(0) <= 'z' && sub.charAt(1) >= 'a' && sub.charAt(1) <= 'z') {
                 if(mp.containsKey(sub)) mp.put(sub, mp.get(sub)+1);
-                else mp.putIfAbsent(sub,1);
+                else mp.put(sub,1);
             }
         }
     }
@@ -33,7 +33,7 @@ class Solution {
         // 1. 집합 A를 기준으로 집합 B 비교 하면서 겹치는 Key 탐색 후 Union, InterSection 계산
         // 2. 집합 B를 기준으로 남은 모든 원소를 Union에 합함
     
-        int union=0, intersection = 0;
+        int union = 0, intersection = 0;
         List<String> checked = new ArrayList<>();
         
         for(String e1 : mp1.keySet()){
@@ -65,10 +65,8 @@ class Solution {
         for(String e2 : mp2.keySet()){
             
             if(checked.contains(e2)) continue;
-            else union += mp2.get(e2);
+            union += mp2.get(e2);
         }
-        
-        System.out.println(union + " : " + intersection);
         
         if(union == 0 && intersection ==0) return 65536;
         else return (int)((double)intersection/union*65536);
