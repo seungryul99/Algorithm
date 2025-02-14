@@ -11,11 +11,8 @@ class Solution {
             int left = commands[i][0]-1;
             int right = commands[i][1];
             int target = commands[i][2]-1;
-            int len = right - left;
-            
-            int[] subArray = new int[len];
-            
-            System.arraycopy(array, left, subArray, 0, len);
+       
+            int[] subArray = Arrays.copyOfRange(array,left,right);
             
             Arrays.sort(subArray);
             
