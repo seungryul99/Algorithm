@@ -22,7 +22,7 @@ public class Main {
     static boolean[] visited;
     static List<Node>[] adj;
 
-    static void dfs(int cur, int cost, int sum){
+    static void dfs(int cur, int sum){
 
         int cnt = 0;
         visited[cur]= true;
@@ -30,7 +30,7 @@ public class Main {
         for (Node next : adj[cur]){
 
             if(visited[next.to]) continue;
-            dfs(next.to, next.cost, sum + next.cost);
+            dfs(next.to, sum + next.cost);
             cnt ++ ;
         }
 
@@ -72,9 +72,9 @@ public class Main {
         }
 
 
-        dfs(1,0,0);
+        dfs(1,0);
         Arrays.fill(visited,false);
-        dfs(maxNode,0,0);
+        dfs(maxNode,0);
 
         System.out.println(max);
     }
