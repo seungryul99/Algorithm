@@ -40,7 +40,7 @@ public class Main {
         int res = 0;
         for (int i=0; i<n; i++) {
             for (int j=0; j<n; j++) {
-                res = max(go(i,j), res);
+                res = max(1+go(i,j), res);
             }
         }
 
@@ -53,6 +53,7 @@ public class Main {
         if(dp[y][x] != -1) return dp[y][x];
         dp[y][x] = 1;
 
+        int val = 0;
 
         for (int w=0; w<4; w++) {
             int ny = y + dy[w];
@@ -61,9 +62,9 @@ public class Main {
             if(ny < 0 || ny >= n || nx < 0 || nx >= n) continue;
             if(adj[ny][nx] <= adj[y][x]) continue;
 
-            dp[y][x] = max(dp[y][x], 1 + go(ny, nx));
+            val = max(val, 1 + go(ny, nx));
         }
 
-        return dp[y][x];
+        return dp[y][x] = val;
     }
 }
