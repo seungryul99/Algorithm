@@ -51,8 +51,7 @@ public class Main {
     public static int go(int y, int x) {
 
         if(dp[y][x] != -1) return dp[y][x];
-        dp[y][x] = 1;
-
+        
         int val = 0;
 
         for (int w=0; w<4; w++) {
