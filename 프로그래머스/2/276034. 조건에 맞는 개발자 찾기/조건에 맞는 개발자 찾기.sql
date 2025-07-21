@@ -1,0 +1,13 @@
+# 개발자의 SKILL_CODE를 2진수로 바꾸고 맨뒤에서 11번째 OR 9번째 수가 1 인 경우
+
+SELECT ID,
+       EMAIL,
+       FIRST_NAME,
+       LAST_NAME
+       
+FROM DEVELOPERS
+
+WHERE SUBSTRING(REVERSE(BIN(SKILL_CODE)),9,1) = 1 OR
+      SUBSTRING(REVERSE(BIN(SKILL_CODE)),11,1) = 1
+      
+ORDER BY ID
