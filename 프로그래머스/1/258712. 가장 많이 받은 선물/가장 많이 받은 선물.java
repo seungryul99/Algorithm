@@ -65,12 +65,6 @@ class Solution {
             idx++;
         }
         
-
-        int max = 0;
-        for (int i=0; i<friends.length; i++) {
-            if(max < res[i]) max = res[i];
-        }
-        
-        return max;
+        return Arrays.stream(res).max().getAsInt();
     }
 }
