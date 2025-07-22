@@ -6,7 +6,7 @@ class Solution {
     public List<Integer> solution(String today, String[] terms, String[] privacies) {
         
         Map<String, Integer> cond = new HashMap<>();
-        int[] cnt = new int[101];
+        List<Integer> res = new ArrayList<>();
 
         // term 초기화
         StringTokenizer stk;        
@@ -51,22 +51,17 @@ class Solution {
                 year--;
             }
             
-            if(tYear > year) cnt[idx]++;
+            if(tYear > year) res.add(idx);
             else if(tYear == year){
                 
-                if(tMonth > month) cnt[idx]++;
+                if(tMonth > month) res.add(idx);
                 else if(tMonth == month){
                     
-                    if(tDay > day) cnt[idx]++;
+                    if(tDay > day) res.add(idx);
                 }
             }
            
             idx++;
-        }
-        
-        List<Integer> res = new ArrayList<>();
-        for(int i=1; i<= privacies.length; i++) {
-            if (cnt[i] > 0) res.add(i);
         }
         
         return res;
