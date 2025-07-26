@@ -79,8 +79,7 @@ class Solution {
 
         return sb.toString();
     }
-    
-    // 실제 거리까지 구할 필요는 없어보임, 가중치만
+
     public static int dist(int dir, int cur){
         
         int dirY = mp.get(dir).y;
