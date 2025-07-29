@@ -2,7 +2,7 @@ import java.util.*;
 
 class Solution {
     
-    static class Stage{
+    static class Stage implements Comparable<Stage>{
         
         int num;
         double success;
@@ -11,13 +11,21 @@ class Solution {
             this.num = num;
             this.success = success;
         }
+        
+        @Override
+        public int compareTo(Stage otherStage){
+            
+            if (this.success < otherStage.success) return 1;
+            if (this.success > otherStage.success) return -1;
+            return this.num < otherStage.num ? -1 : 1;
+        }
     }
     
     public int[] solution(int N, int[] stages) {
         
         int[] cnt = new int[N+2];
         int[] psum = new int[N+2];
-        List<Stage> list = new ArrayList<>();
+        Set<Stage> st = new TreeSet<>();
         
         for (int x : stages) cnt[x]++;
         
@@ -26,20 +34,14 @@ class Solution {
         
         for (int i=1; i<=N; i++){
             
-            double success = psum[i] == 0 ? 0.0 : (double) cnt[i] / psum[i];
-            list.add(new Stage(i, success));
-            System.out.println(i + " : " + success);
+            double success = (double) cnt[i] / psum[i];
+            st.add(new Stage(i, success));
         }
-                
-        return list.stream()
-            .sorted((a,b)-> {
-                int cmp = Double.compare(a.success, b.success);
-            
-                if(cmp < 0) return 1;
-                if(cmp > 0) return -1;
-                return Integer.compare(a.num, b.num);
-            })
-            .mapToInt(stage -> stage.num)
-            .toArray();
+        
+        int[] res = new int[N];
+        int idx = 0;
+        for (Stage s : st) res[idx++] = s.num; 
+        
+        return res;
     }
 }
