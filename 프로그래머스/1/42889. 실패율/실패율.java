@@ -16,8 +16,10 @@ class Solution {
         public int compareTo(Stage otherStage){
             
             if (this.success < otherStage.success) return 1;
-            if (this.success > otherStage.success) return -1;
-            return this.num < otherStage.num ? -1 : 1;
+            else if (this.success > otherStage.success) return -1;
+            else {
+                return this.num < otherStage.num ? -1 : 1;
+            }
         }
     }
     
@@ -34,7 +36,7 @@ class Solution {
         
         for (int i=1; i<=N; i++){
             
-            double success = (double) cnt[i] / psum[i];
+            double success = psum[i] == 0 ? 0.0 : (double) cnt[i] / psum[i];
             st.add(new Stage(i, success));
         }
         
