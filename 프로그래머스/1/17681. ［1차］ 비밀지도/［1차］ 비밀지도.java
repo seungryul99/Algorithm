@@ -1,45 +1,29 @@
 class Solution {
-    public StringBuilder[] solution(int n, int[] arr1, int[] arr2) {
+    public String[] solution(int n, int[] arr1, int[] arr2) {
         
-        StringBuilder[] res = new StringBuilder[n];
+        String[] bit = new String[n];
+        for (int i=0; i<n; i++) bit[i] = Integer.toBinaryString(arr1[i] | arr2[i]);
         
-        // arr1 처리
-        for(int i=0; i<n; i++){
+        // for(String s : bit) {
+        //     s = s.replace("0", " ");
+        //     s = s.replace("1", "#");
+        // }
+        
+        for (int i=0; i<n; i++){
             
-            StringBuilder sb = new StringBuilder();
-            
-            // 10 -> 2
-            String byNum = Integer.toBinaryString(arr1[i]);
-            
-            for(int j=0; n-byNum.length()>j; j++){
-                sb.append(" ");
-            }
-            
-            for(int j=0; j<byNum.length(); j++){
-                
-                if(byNum.charAt(j) == '1') sb.append("#");
-                else sb.append(" ");
-            }
-            
-            res[i] = sb;
+            bit[i] = bit[i].replace("0", " ").replace("1", "#");
+            bit[i] = prefix(n, bit[i]);
         }
         
-        // arr2 처리
-        for(int i=0; i<n; i++){
-            
-            String byNum = Integer.toBinaryString(arr2[i]);
-            int idx = n-byNum.length();
-            
-            for(int j=0; j<byNum.length(); j++){
-                
-                if(byNum.charAt(j)=='1' && res[i].charAt(idx)==' ') {
-                    res[i].replace(idx, idx +1, "#");
-                }
-                idx++;
-            }
-        }
+        return bit;
+    }
+    
+    public String prefix(int n, String s){
         
+        StringBuilder sb = new StringBuilder();
         
-        return res;   
+        for (int i=0; i<n - s.length(); i++) sb.append(" ");
+        
+        return sb.toString() + s;
     }
 }
