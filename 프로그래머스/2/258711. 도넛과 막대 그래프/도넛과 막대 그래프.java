@@ -55,17 +55,15 @@ class Solution {
         
         Set<Integer> st = mp.keySet();
         
-        int max = -1;
         int start = 0;
         
         for (int cur : st){
             
             Node node = mp.get(cur);
             
-            if(node.in.size() == 0 && node.out.size() > max){
-                
-                start = cur;
-                max = node.out.size();
+            if(node.in.size() == 0 && node.out.size() >= 2){
+                start = cur;   
+                break;
             }
         }
         
