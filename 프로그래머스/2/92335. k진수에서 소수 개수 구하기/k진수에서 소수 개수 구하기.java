@@ -1,53 +1,35 @@
 import java.util.*;
 
 class Solution {
-    
-    public static boolean check(long num){
-        
-        if(num <= 1) return false;
-        if(num == 2) return true;
-        if(num % 2 ==0) return false;
-        
-        for(long i=2; i*i <= num; i++){
-            
-            if(num % i ==0) return false;
-        }
-        
-        return true;
-    } 
-        
     public int solution(int n, int k) {
         
-        Deque<Long> dq = new ArrayDeque<>();
+        String kBynaryString = Integer.toString(n, k);
+        StringTokenizer stk = new StringTokenizer(kBynaryString, "0");
+        System.out.println(kBynaryString);
         int res = 0;
-    
-        // n -> k 진수 변환
-        while (n > 0){
-            
-            dq.push((long)n%k);    
-            n/=k;
-        }
         
-        // 소수체크
-        
-        String numStr = "";
-        for(Long i : dq){
+        while(stk.hasMoreTokens()){
             
-            if(i==0) {
-                
-                if(numStr == "") continue;
-              
-                if(check(Long.parseLong(numStr))) res++;
-                  
-                numStr = "";
-                continue;
-            }
-            numStr += i;
+            String s = stk.nextToken();
+            long num = Long.parseLong(s);
+          System.out.println(s);
+            
+            if(isPrime(num)) res++;
         }
-    
-
-        if(!numStr.isBlank() && check(Long.parseLong(numStr))) res++; 
         
         return res;
     }
-} 
+    
+    static boolean isPrime(long n){
+        
+        if(n <= 1) return false;
+        if(n == 2) return true;
+        if(n % 2 == 0) return false;
+        
+        for (long i=2; i* i <= n; i++) 
+            if(n % i == 0) return false;
+        
+        return true;
+    }
+    
+}
