@@ -50,8 +50,15 @@ class Solution {
                             
                             List<Integer> list = mp.getOrDefault(key, null);
                             if(list == null) continue;
-                            int idx = lowerBound(list, score);
                             
+                            int idx = Collections.binarySearch(list, score);
+                            
+                            if (idx < 0) idx = -idx - 1; 
+                            else {
+                                while (idx > 0 && list.get(idx - 1) >= score) {
+                                    idx--;
+                                }
+                            }
                             int p = list.size() - idx;
                             if(p>0) cnt += p;
                         }
@@ -62,21 +69,6 @@ class Solution {
         }
         
         return res;
-    }
-    
-    // target 이상의 첫번째 위치
-    public int lowerBound(List<Integer> list, int target) {
-        
-        int start = 0, end = list.size(); 
-        
-        while (start < end) {
-            
-            int mid = (start + end) / 2;
-            
-            if (list.get(mid) >= target) end = mid;
-            else start = mid + 1;
-        }
-        return start; 
     }
 
 }
