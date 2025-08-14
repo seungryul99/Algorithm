@@ -4,7 +4,6 @@ class Solution {
     public int solution(String s) {
         
         int len = s.length();
-        
         int res = s.length();
         
         for (int unit=1; unit<=len/2; unit++){
