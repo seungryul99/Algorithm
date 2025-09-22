@@ -2,37 +2,27 @@ import java.util.*;
 
 class Solution {
     public String solution(int n, int t, int m, int p) {
-       
-        int num = 0;
-        int turn = 1;
-        boolean end = false;
+        
+        int num = 0, order = 1; 
         StringBuilder sb = new StringBuilder();
         
-        while(!end){
+        while(true){
             
-            String s = Integer.toString(num,n);
+            String bs = Integer.toString(num++, n);
             
-            for(int i=0; i<s.length(); i++){
+            for (int i=0; i<bs.length(); i++){
                 
-                if(turn > m) turn -= m;
-                
-                if(turn == p) {
+                if(order == p) {
+                    sb.append(bs.charAt(i));
                     
-                    sb.append(s.charAt(i));
-                    
-                    if(sb.length() == t) {
-    
-                        end = true;
-                        break;
-                    }
+                    if(sb.length() == t) return sb.toString().toUpperCase();
                 }
                 
-                turn++;
-                
+                order++;
+                if(order > m) order -= m;
             }
-            num++;
         }
         
-        return sb.toString().toUpperCase();
+    
     }
 }
