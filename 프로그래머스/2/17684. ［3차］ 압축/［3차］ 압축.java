@@ -2,36 +2,40 @@ import java.util.*;
 
 class Solution {
     public List<Integer> solution(String msg) {
-        
+
         Map<String, Integer> dic = new HashMap<>();
         List<Integer> res = new ArrayList<>();
         
         // 사전 초기화
-        for (int i=65; i<=90; i++) dic.put(String.valueOf((char)i),i-64);
-
-        for (int i=0; i<msg.length();){
+        for (int i=65; i<=90; i++) dic.put(""+(char)i, i-64);
+        
+        while(msg.length() > 0){
             
-            int idx = 0;
+            int idx = 1;
+            String w = null;
             
-            for (int j=i+1; j<=msg.length(); j++){
+            while(true){
                 
-                String key = msg.substring(i,j);
+                String now = msg.substring(0, idx);
+                Integer val = dic.getOrDefault(now, null);
                 
-                if(dic.containsKey(key)) {
-                    idx = dic.get(key);
-                
-                    if(j==msg.length()){
-                        System.out.println(key);
-                        res.add(idx);
-                        i+= j;
+                if (val != null){
+                    
+                    if(idx == msg.length()) {
+                        
+                        msg = "";
+                        res.add(dic.get(now));
                         break;
                     }
-                }
+                    
+                    w = now;
+                    idx++;
+                } 
                 else {
                     
-                    dic.put(key,dic.size()+1);
-                    res.add(idx);
-                    i+= j-i-1;
+                    res.add(dic.get(w));
+                    dic.put(now, dic.size()+1);
+                    msg = msg.substring(w.length(), msg.length());
                     break;
                 }
             }
