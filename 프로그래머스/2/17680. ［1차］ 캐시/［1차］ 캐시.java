@@ -3,8 +3,8 @@ import java.util.*;
 class Solution {
     public int solution(int cacheSize, String[] cities) {
         
-        Map<String, Integer> cache = new HashMap<>();
-        int res = 0, time = 1;
+        int res = 0;
+        List<String> cache = new ArrayList<>();
         
         if (cacheSize == 0) return cities.length * 5;
         
@@ -12,43 +12,24 @@ class Solution {
             
             city = city.toLowerCase();
             
-            int now = cache.getOrDefault(city, 0);
-            
-            // cache miss
-            if (now == 0){
+            // cache hit
+            if (cache.contains(city)){
                 
-                if(cache.size() < cacheSize) {
-                    cache.put(city, time);
-                }
-                else {
-                    
-                    int min = 10000000;
-                    String deleteKey="";
-                    for(String key : cache.keySet()){
-                        
-                        int val = cache.get(key);
-                        
-                        if (min > val){
-                            min = val;
-                            deleteKey = key;
-                        }
-                    }
-                    
-                    cache.remove(deleteKey);
-                    cache.put(city, time);
+                cache.remove(city);
+                cache.add(city);
+                res++;
+            }
+            else {
+                
+                if(cache.size() < cacheSize) cache.add(city);
+                else{
+                    cache.remove(0);
+                    cache.add(city);
                 }
                 res += 5;
             }
-            
-            // cache hit
-            else {
-                cache.put(city, time);
-                res += 1;
-            }
-            
-            time++;
         }
-
+        
         return res;
     }
 }
