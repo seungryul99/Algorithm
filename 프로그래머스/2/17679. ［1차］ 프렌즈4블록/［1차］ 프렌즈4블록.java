@@ -17,7 +17,7 @@ class Solution {
         }
         @Override
         public int hashCode() {
-            return 31 * y + x;
+            return Objects.hash(y,x);
         }
     }
     
